@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/authmiddleware.js');
 const router = express.Router();
 
 router.get('/', authMiddleware, getAllCentres);
-router.get('/:sportId', authMiddleware, getCentresBySport);
+router.get('/:sportsName', authMiddleware, getCentresBySport);
 router.post('/dummy', addDummyCentres)
 router.post('/dummycourts', addCourtAndUpdateCentre)
 

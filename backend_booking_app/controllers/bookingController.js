@@ -5,11 +5,9 @@ const User = require('../models/User');
 
 // Create a booking (no change)
 exports.createBooking = async (req, res) => {
+    console.log(`someone is trying to book`);
     const { centre_id, sport_id, court_id, slot_time, slot_date } = req.body;
-    // const createdBy = req.user.id;
-
     try {
-        // Check if the slot is already booked for the same court and time
         const existingBooking = await Booking.findOne({
             court: court_id,
             slot_date,
@@ -89,5 +87,25 @@ exports.cancelBooking = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error cancelling booking' });
+    }
+};
+
+exports.getBookingsByCentreAndSport = async (req, res) => {
+    const { centre_id, sport_id, slot_date } = req.body; // Assuming these are passed as URL parameters
+    console.log('hello');
+    try {
+        // Find all bookings that match the specified centre and sport
+        const bookings = await Booking.find({
+            centre: centre_id,
+            sport: sport_id,
+            slot_date : slot_date
+        }).populate('court createdBy');
+        if (bookings.length === 0) {
+            return res.status(404).json({ message: 'No bookings found for this sport in the specified centre' });
+        }
+        res.status(200).json({bookings});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error fetching bookings for the centre and sport' });
     }
 };
