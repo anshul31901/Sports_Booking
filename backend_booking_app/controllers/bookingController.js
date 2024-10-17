@@ -96,7 +96,8 @@ exports.cancelBooking = async (req, res) => {
 
 exports.getBookingsByCentreAndSport = async (req, res) => {
     const { centre_id, sport_id, slot_date } = req.body; // Assuming these are passed as URL parameters
-    console.log('hello');
+    console.log('hello11');
+    console.log(centre_id, sport_id, slot_date);
     try {
         // Find all bookings that match the specified centre and sport
         const bookings = await Booking.find({
@@ -104,9 +105,9 @@ exports.getBookingsByCentreAndSport = async (req, res) => {
             sport: sport_id,
             slot_date : slot_date
         }).populate('court createdBy');
-        if (bookings.length === 0) {
-            return res.status(404).json({ message: 'No bookings found for this sport in the specified centre' });
-        }
+        // if (bookings.length === 0) {
+        //     return res.status(404).json({ message: 'No bookings found for this sport in the specified centre' });
+        // }
         res.status(200).json({bookings});
     } catch (error) {
         console.log(error);
