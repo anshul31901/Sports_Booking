@@ -78,6 +78,9 @@ Here is the flow diagram outlining the booking process:
 - Managers can manage (view, create, and cancel) bookings for their assigned centers.
 
 ## Links
-- [Frontend Deployed URL](#)
-- [Backend Deployed URL](#)
+- [Deployed URL](https://sports-booking-frontend-2.onrender.com)
+
+## Report
+
+You can find the detailed project report [here](reportV2.pdf).
 ```
