@@ -11,7 +11,7 @@ const bookingRoutes = require('./routes/bookingRoutes.js')
 const app = express();
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000',  // Replace with your frontend's URL
+    origin: process.env.FRONTEND_URL, // Replace with your frontend's URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
