@@ -7,7 +7,6 @@ const Court = ({courts, setCourtId, bookings}) => {
         <span style={{height : '100%' ,outline : '1px solid lightgray' , display : 'flex'}}>
        {
            courts.map((e, idx)=>{
-            console.log(e);
                return <CourtColumn  bookings = {bookings} ac_id = {e._id} id={idx} setCourtId={setCourtId}/>
             })
         }

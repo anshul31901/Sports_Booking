@@ -152,7 +152,7 @@ const DashBoardPage = () => {
     useEffect(()=>{ 
         const getBookings = async(e)=>{
             try {
-                const apiUrl = process.env.REACT_APP_API_URL + `/sports-centre-date`; // Get the API URL from the env
+                const apiUrl = process.env.REACT_APP_API_URL + `/bookings/sports-centre-date`; // Get the API URL from the env
                 console.log(apiUrl);
                 const response = await fetch(apiUrl, {
                   method: 'POST',
@@ -167,8 +167,10 @@ const DashBoardPage = () => {
                 })
                 });
                 const data = await response.json();
+                console.log(data);
                 if(response.status == 200)
-                {
+                {   
+                  
                     setBookings(data.bookings);
                 }
               } catch (error) {
