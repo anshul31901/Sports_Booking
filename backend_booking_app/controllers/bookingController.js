@@ -15,6 +15,8 @@ exports.createBooking = async (req, res) => {
         });
 
         if (existingBooking) {
+            // If a booking already exists, rather than sending back the error, we create the booking with
+            // waitlisted status, this helps us keep track of all bookings (confirmed or not)
             return res.status(400).json({ message: 'Slot already booked' });
         }
 
@@ -87,12 +89,23 @@ exports.cancelBooking = async (req, res) => {
         if (booking.createdBy.toString() !== req.user.id) return res.status(403).json({ message: 'Unauthorized' });
 
         await booking.deleteOne({_id:new mongoose.Types.ObjectId('671005196e4fdf018f3a21ac')});
+        // When a booking is cancelled, we can search the bookings with specifications 
+        // (waitlisted, same slot_time, same slot_date) and confirm their booking, 
+        // and send the customer a notification
         res.json({ message: 'Booking cancelled' });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: 'Error cancelling booking' });
     }
 };
+
+
+
+{
+    waitlistId
+    booking_id-->cancel-->searchfor waitlist ids -->createbooking(id_)
+
+}
 
 exports.getBookingsByCentreAndSport = async (req, res) => {
     const { centre_id, sport_id, slot_date } = req.body; // Assuming these are passed as URL parameters
