@@ -41,6 +41,10 @@ exports.createBooking = async (req, res) => {
 // Get all bookings for a normal user
 exports.getUserBookings = async (req, res) => {
     try {
+        console.log(req.user)
+        if(req.user.role=='manager'){
+            return this.getManagerBookings(req,res)
+        }
         const bookings = await Booking.find({ createdBy: req.user._id }).populate('centre sport court');
         res.json(bookings);
     } catch (error) {

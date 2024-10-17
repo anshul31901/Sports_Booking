@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', authMiddleware, getAllCentres);
 router.get('/:sportsName', authMiddleware, getCentresBySport);
-router.post('/dummy', addDummyCentres)
-router.post('/dummycourts', addCourtAndUpdateCentre)
+// router.post('/dummy', addDummyCentres)
+// router.post('/dummycourts', addCourtAndUpdateCentre)
 
 module.exports = router;
